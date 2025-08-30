@@ -1,50 +1,48 @@
-@ -0,0 +1,49 @@
 <!DOCTYPE HTML>
 <html>
-    <head>
-        <title>Random Pixel Colors</title>
-        <style>
-            body, html {
-                margin: 0;
-                padding: 0;
-                overflow: hidden;
-                width: 100vw;
-                height: 100vh;
-            }
-            canvas {
-                display: block;
-            }
-        </style>
-    </head>
-    <body>
-        <canvas id="randomCanvas"></canvas>
-        <script>
-            function randomColor() {                return [
-                    Math.floor(Math.random() * 256),
-                    Math.floor(Math.random() * 256),
-                    Math.floor(Math.random() * 256),
-                    255
-                ];
- 
+<head>
+    <title>Random Pixel Colors - True High Resolution</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            width: 100vw;
+            height: 100vh;
+        }
+        canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="randomCanvas"></canvas>
+    <script>
+        // Zufallsfarbe generieren
+        function randomColor() {
+            return `rgb(${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)})`;
+        }
 
-            function fillCanvasWithRandomColors() {
-                const canvas = document.getElementById('randomCanvas');
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-                const ctx = canvas.getContext('2d');
-                const imgData = ctx.createImageData(canvas.width, canvas.height);
-                for (let i = 0; i < imgData.data.length; i += 4) {
-                    const color = randomColor();
-                    imgData.data[i] = color[0];
-                    imgData.data[i + 1] = color[1];
-                    imgData.data[i + 2] = color[2];
-                    imgData.data[i + 3] = color[3];
+        function fillCanvasWithRandomColors() {
+            const canvas = document.getElementById('randomCanvas');
+            const ctx = canvas.getContext('2d');
+
+            // Canvas auf Bildschirmgröße setzen
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            // Jeden Bildschirm-Pixel zufällig füllen
+            for (let y = 0; y < canvas.height; y++) {
+                for (let x = 0; x < canvas.width; x++) {
+                    ctx.fillStyle = randomColor();
+                    ctx.fillRect(x, y, 1, 1);
                 }
-                ctx.putImageData(imgData, 0, 0);
             }
+        }
 
-            window.onload = fillCanvasWithRandomColors;
-            window.onresize = fillCanvasWithRandomColors;
-        </script>
-    </body>
+        window.onload = fillCanvasWithRandomColors;
+        window.onresize = fillCanvasWithRandomColors;
+    </script>
+</body>
 </html>
