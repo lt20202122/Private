@@ -2,6 +2,24 @@
 var cpuMove, pMove
 let score=[0,0]
 
+const moves = {
+    Rock: {
+        Rock:"Tie",
+        Scissors:"Win",
+        Paper:"Lose",
+        },
+    Scissors: {
+        Rock:"Lose",
+        Scissors:"Tie",
+        Paper:"Win",
+        },
+    Paper:{
+        Rock:"Win",
+        Scissors:"Lose",
+        Paper:"Tie",
+    },
+    }
+
 // 1.
 cpuMove = Math.floor(Math.random() * 3) + 1;
 
@@ -12,14 +30,14 @@ if (cpuMove == 1) {
 } else if (cpuMove == 3) {
     cpuMove = "Scissors";
 }
-console.log("computer chose "+cpuMove+".")
 
-
+console.log("Computer chose "+cpuMove+".")
 
 // 1 = Rock, 2 = Scissors, 3 = Paper
 
 //2.
-pMove=Number(prompt("Rock, Scissors, Paper?", "Pick one of it"))
-//if (pMove=="Rock") {
-//    if 
-//}
+pMove=prompt("Rock, Scissors, Paper?", "Pick one of it")
+let solution = moves[pMove][cpuMove]
+alert ("The computer picked "+cpuMove+".")
+alert ("This is a "+solution+".")
+console.log(solution)
